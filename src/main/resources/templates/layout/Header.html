@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Website infomation -->
     <title>Táo Thơm | Táo giá thơm</title>
@@ -14,6 +15,50 @@
     <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Font Awesome for additional icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        .account-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 0.375rem;
+            /* Thay đổi để bo tròn góc */
+            top: 100%;
+            left: 0;
+            width: 200px;
+            /* Đặt chiều rộng cố định cho menu */
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Thêm bóng mờ */
+        }
+
+        .nav-item.show .account-menu {
+            display: block;
+        }
+
+        .account-menu a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.875rem;
+            /* Giảm kích thước chữ */
+        }
+
+        .account-menu a:hover {
+            background-color: #f1f1f1;
+            /* Thay đổi màu nền khi hover */
+        }
+
+        .nav-item {
+            position: relative;
+            /* Để menu con có thể được đặt đúng vị trí */
+        }
+    </style>
 </head>
 
 <body>
@@ -43,30 +88,34 @@
                     <div class="col-sm-6">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" th:href="@{/cart/view}">Giỏ hàng <span
-                                        class="badge bg-info">{{cart.count}}</span></a> 
+                                <a class="nav-link active" aria-current="page" th:href="@{/cart/view}"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng <span
+                                        class="badge bg-info">{{cart.count}}</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/Assignment/contact">Liên hệ</a>
+                                <a class="nav-link active" aria-current="page" href="/Assignment/contact"><i class="fa-solid fa-phone"></i> Liên hệ</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Tài khoản
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-                                    <li><a class="dropdown-item" href="/account/login">Đăng nhập</a></li>
-                                    <li><a class="dropdown-item" href="/account/register">Đăng ký</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="/account/orders">Đơn hàng</a></li>
-                                </ul>
+                            <li class="nav-item" id="accountMenuItem">
+                                <a class="nav-link" href="#" id="accountToggle"><i class="fas fa-user-circle"></i> Tài
+                                    khoản</a>
+                                <div class="account-menu">
+                                    <a class="dropdown-item" th:href="@{/security/login/form}"><i
+                                            class="fas fa-sign-in-alt"></i> Đăng nhập</a>
+                                    <a class="dropdown-item"> <i class="fa-regular fa-pen-to-square"></i> Đăng ký</a>
+                                    <a class="dropdown-item" th:href="@{/security/logoff}"><i
+                                            class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                                    <a class="dropdown-item" th:href="@{/order/list}"><i class="fas fa-box"></i> Đơn
+                                        hàng</a>
+                                    <a class="dropdown-item" th:href="@{/admin/home/index}"><i
+                                            class="fa-solid fa-user-tie"></i> Administration Zone</a>
+                                </div>
                             </li>
                         </ul>
                     </div>
-
                 </div>
             </div>
         </div>
     </nav>
+
     <div class="navItem">
         <!-- Nav sản phẩm -->
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(238, 238, 238);">
@@ -74,17 +123,20 @@
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="/product/list?cid=1001"><span class="bi bi-phone"></span> iPhone</a>
+                            <a class="nav-link" href="/product/list?cid=1001"><span class="bi bi-phone"></span>
+                                iPhone</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/product/list?cid=1002"><span class="bi bi-tablet"></span> iPad</a>
+                            <a class="nav-link" href="/product/list?cid=1002"><span class="bi bi-tablet"></span>
+                                iPad</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/product/list?cid=1003"><span class="bi bi-laptop"></span>
                                 MacBook</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/product/list?cid=1004"><span class="bi bi-headphones"></span> Phụ kiện</a>
+                            <a class="nav-link" href="/product/list?cid=1004"><span class="bi bi-headphones"></span> Phụ
+                                kiện</a>
                         </li>
                     </ul>
                 </div>
@@ -94,63 +146,22 @@
     <!-- Navbar -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('accountToggle').addEventListener('click', function (event) {
+            event.preventDefault();
+            var menu = document.querySelector('.account-menu');
+            menu.style.display = (menu.style.display === 'block' ? 'none' : 'block');
+        });
+
+        // Close the menu if clicked outside of it
+        document.addEventListener('click', function (event) {
+            var accountMenu = document.getElementById('accountMenuItem');
+            if (!accountMenu.contains(event.target)) {
+                var menu = document.querySelector('.account-menu');
+                menu.style.display = 'none';
+            }
+        });
+    </script>
 </body>
-
-<style>
-    #itemShow {
-        height: 200px;
-        width: 100%;
-        min-height: 30%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    #itemShow img {
-        max-height: 100%;
-        max-width: 100%;
-        object-fit: contain;
-    }
-
-    #itemShow1 {
-        height: 280px;
-        width: 100%;
-        min-height: 30%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    #itemShow1 img {
-        max-height: 100%;
-        max-width: 100%;
-        object-fit: contain;
-    }
-
-    #itemShow1-group:hover img,
-    #itemShow1-group:hover h6 {
-        transform: scale(1.1);
-        color: rgb(255, 179, 92);
-    }
-
-    .card-group a {
-        text-decoration: none;
-    }
-
-    /*Footer*/
-    .foot-pd-li li {
-        margin-bottom: 20px;
-        font-size: small;
-    }
-
-    .foot-pd-li li a {
-        text-decoration: none;
-        color: gray;
-    }
-
-    .foot-pd-li li a:hover {
-        color: rgb(74, 74, 74);
-    }
-</style>
 
 </html>
