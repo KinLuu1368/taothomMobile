@@ -1,0 +1,66 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Category Management</h5>
+        </div>
+        <div class="card-body">
+            <!-- Add Category Form -->
+            <div class="mb-3">
+                <h6 class="card-title">Add New Category</h6>
+                <form ng-submit="addCategory()">
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <label for="categoryID" class="form-label">ID</label>
+                            <input type="text" id="categoryID" ng-model="form.id" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label for="categoryName" class="form-label">Category Name</label>
+                            <input type="text" id="categoryName" ng-model="form.name" class="form-control"
+                                required>
+                        </div>                        
+                    </div>
+                    <button ng-click="create()" class="btn btn-primary">
+                        <i class="bi bi-plus"></i> Create
+                    </button>
+                    <button ng-click="update()" class="btn btn-success">
+                        <i class="bi bi-save"></i> Update
+                    </button>
+                    <button ng-click="delete(form)" class="btn btn-danger">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                    <button ng-click="reset()" class="btn btn-info">
+                        <i class="bi bi-arrow-clockwise"></i> Reset
+                    </button>
+                </form>
+            </div>
+
+            <!-- Category List -->
+            <h6 class="card-title">Category List</h6>
+            <table class="table table-striped">
+                <thead class="bg-secondary text-white">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
+                                <button ng-click="edit(item)" class="btn btn-warning">
+                                    <i class="bi bi-pencil"></i> Edit
+                                </button>
+                                <button ng-click="delete(item)" class="btn btn-danger">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

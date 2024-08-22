@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Website infomation -->
+    <title>Táo Thơm | Táo giá thơm</title>
+    <link rel="shortcut icon" href="/image/Logo/Apple_Store_logo.svg.png" type="image/x-icon">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header style="width: 100%;">
+        <h5 class="m-2 text-center">IPHONE 15 SERIES SẲN HÀNG GIAO NGAY <strong>HOTLINE: 03347.10.393</strong></h5>
+    </header>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <h2><span class="bi bi-apple" style="font-size: 1.4em;"></span>TÁO THƠM</h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="row" style="width: 100%;">
+                    <div class="col-sm-6">
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="iPhone 15 Pro Max 256gb"
+                                aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Tìm</button>
+                        </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" th:href="@{/cart/view}">Giỏ hàng <span
+                                        class="badge bg-info">{{cart.count}}</span></a> 
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/Assignment/contact">Liên hệ</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Tài khoản
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                                    <li><a class="dropdown-item" href="/account/login">Đăng nhập</a></li>
+                                    <li><a class="dropdown-item" href="/account/register">Đăng ký</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/account/orders">Đơn hàng</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="navItem">
+        <!-- Nav sản phẩm -->
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(238, 238, 238);">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/product/list?cid=1001"><span class="bi bi-phone"></span> iPhone</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/product/list?cid=1002"><span class="bi bi-tablet"></span> iPad</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/product/list?cid=1003"><span class="bi bi-laptop"></span>
+                                MacBook</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/product/list?cid=1004"><span class="bi bi-headphones"></span> Phụ kiện</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+<style>
+    #itemShow {
+        height: 200px;
+        width: 100%;
+        min-height: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #itemShow img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    #itemShow1 {
+        height: 280px;
+        width: 100%;
+        min-height: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #itemShow1 img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    #itemShow1-group:hover img,
+    #itemShow1-group:hover h6 {
+        transform: scale(1.1);
+        color: rgb(255, 179, 92);
+    }
+
+    .card-group a {
+        text-decoration: none;
+    }
+
+    /*Footer*/
+    .foot-pd-li li {
+        margin-bottom: 20px;
+        font-size: small;
+    }
+
+    .foot-pd-li li a {
+        text-decoration: none;
+        color: gray;
+    }
+
+    .foot-pd-li li a:hover {
+        color: rgb(74, 74, 74);
+    }
+</style>
+
+</html>
