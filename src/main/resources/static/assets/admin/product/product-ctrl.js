@@ -2,6 +2,8 @@ app.controller("product-ctrl", function($scope, $http) {
     $scope.items =[]
     $scope.cates = []
     $scope.form = {}
+	$scope.series = []
+	$scope.pm = []
 
     $scope.initialize = function() {
         $http.get("/rest/products").then(resp => {
@@ -15,6 +17,16 @@ app.controller("product-ctrl", function($scope, $http) {
         $http.get("/rest/categories").then(resp => {
             $scope.cates = resp.data
         })
+
+		$http.get("/rest/ProductModel").then(resp => {
+            $scope.pm = resp.data
+        })
+
+
+		$http.get("/rest/series").then(resp => {
+            $scope.series = resp.data;
+        });
+
         console.log(JSON.stringify($scope.cates))
     };
 
@@ -25,7 +37,7 @@ app.controller("product-ctrl", function($scope, $http) {
     $scope.imageChanged = function(files){
 		var data = new FormData();
 		data.append('file', files[0]);
-		$http.post('/rest/upload/images', data,{
+		$http.post('/rest/upload/images', data,{ //LINK FILE Ở CHỖ NÀY
 			transformRequest: angular.identity,
 			headers:{'Content-Type':undefined}
 		}).then(resp => {

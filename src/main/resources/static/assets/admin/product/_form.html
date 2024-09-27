@@ -12,13 +12,40 @@
             <div class="col-sm-8">
                 <div class="row mb-3">
                     <div class="col-sm-6">
-                        <label for="name" class="form-label">Name</label>
-                        <input id="name" ng-model="form.name" class="form-control" type="text">
+                        <label for="category" class="form-label">Category</label>
+                        <select id="category" ng-model="form.category.id" class="form-select">
+                            <option ng-repeat="c in cates" ng-value="c.id">{{c.name}}</option>
+                        </select>
                     </div>
                     <div class="col-sm-6">
-                        <label for="price" class="form-label">Price</label>
-                        <input id="price" ng-model="form.price" class="form-control" type="number" step="0.01">
+                        <label for="series" class="form-label">Series</label>
+                        <select id="series" ng-model="form.series.id" class="form-select">
+                            <option ng-repeat="c in series" ng-value="c.id">{{c.name}}</option>
+                        </select>
                     </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-6">
+                        <label for="productmodel" class="form-label">Product Model</label>
+                        <select id="productModel" ng-model="form.productModel.id" class="form-select">
+                            <option ng-repeat="c in pm" ng-value="c.id">{{c.name}}</option>
+                        </select>
+                    </div>  
+                    <div class="col-sm-6">
+                        <label for="name" class="form-label">Name</label>
+                        <input id="name" ng-model="form.name" class="form-control" type="text">
+                    </div>                                      
+                </div>                
+                <div class="row mb-3">
+                    <div class="col-sm-6">
+                        <label for="color" class="form-label">Color</label>
+                        <input id="color" ng-model="form.color" class="form-control" type="text">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="capacity" class="form-label">Storage</label>
+                        <input id="capacity" ng-model="form.capacity" class="form-control" type="text">
+                    </div>
+                    
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-6">
@@ -27,10 +54,8 @@
                             onchange="angular.element(this).scope().imageChanged(this.files)">
                     </div>
                     <div class="col-sm-6">
-                        <label for="category" class="form-label">Category</label>
-                        <select id="category" ng-model="form.category.id" class="form-select">
-                            <option ng-repeat="c in cates" ng-value="c.id">{{c.name}}</option>
-                        </select>
+                        <label for="price" class="form-label">Price</label>
+                        <input id="price" ng-model="form.price" class="form-control" type="number" step="0.01">
                     </div>
                 </div>
                 <div class="row mb-3">

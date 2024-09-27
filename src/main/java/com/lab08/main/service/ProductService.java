@@ -11,6 +11,8 @@ public interface ProductService {
 
     List<Product> findByCategoryId(String cid);
 
+    List<Product> findByProductModelId(int modelId);
+
     Product create(Product product);
 
     Product update(Product product);

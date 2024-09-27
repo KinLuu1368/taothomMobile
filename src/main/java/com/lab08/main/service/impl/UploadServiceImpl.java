@@ -28,7 +28,7 @@ public class UploadServiceImpl implements UploadService {
         }
 
         // Lưu vào đường dẫn cụ thể
-        Path specificPath = Paths.get("G:/JAVA/BaoVeTotNghiep/Assignment/src/main/resources/static/assets/" + folder);
+        Path specificPath = Paths.get("G:/Nghiencuu/Assignment/src/main/resources/static/assets/" + folder);
         if (!Files.exists(specificPath)) {
             try {
                 Files.createDirectories(specificPath);

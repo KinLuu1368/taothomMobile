@@ -2,9 +2,16 @@ app.controller("category-ctrl", function($scope, $http) {
     $scope.items =[]
     $scope.form = {}
 
+	$scope.series =[]
+	$scope.Sform = {}
+
     $scope.initialize = function() {
         $http.get("/rest/categories").then(resp => {
             $scope.items = resp.data;
+        });
+
+		$http.get("/rest/series").then(resp => {
+            $scope.series = resp.data;
         });
 
         console.log(JSON.stringify($scope.items))
@@ -33,7 +40,7 @@ app.controller("category-ctrl", function($scope, $http) {
 
     $scope.update = function(){
 		var item = angular.copy($scope.form);
-		$http.put(`/rest/products/${item.id}`, item).then(resp => {
+		$http.put(`/rest/categories/${item.id}`, item).then(resp => {
 			var index = $scope.items.findIndex(p => p.id == item.id);
 			$scope.items[index] = item;
 			alert("update success");
@@ -44,10 +51,56 @@ app.controller("category-ctrl", function($scope, $http) {
 	}
 
     $scope.delete = function(item){
-		$http.delete(`/rest/products/${item.id}`).then(resp => {
+		$http.delete(`/rest/categories/${item.id}`).then(resp => {
 			var index = $scope.items.findIndex(p => p.id == item.id);
 			$scope.items.splice(index, 1);
 			$scope.reset();
+			alert("delete success");
+		}).catch(error => {
+			alert("delete fail");
+			console.log("Error", error);
+		});
+	}
+
+	// Series controller
+	$scope.edit1 = function(item) {
+        $scope.Sform = angular.copy(item);
+    }
+
+    $scope.reset1 = function() {
+        $scope.Sform = {};
+    }
+
+    $scope.create1 = function() {
+        var item = angular.copy($scope.Sform)
+        console.log(item);
+        $http.post(`/rest/series`, item).then(resp => {
+            $scope.series.push(resp.data)
+            $scope.reset()
+            alert("create success")
+        }).catch(error => {
+            alert("create fail")
+            console.log(error)
+        })
+    }
+
+    $scope.update1 = function(){
+		var item = angular.copy($scope.Sform);
+		$http.put(`/rest/series/${item.id}`, item).then(resp => {
+			var index = $scope.series.findIndex(p => p.id == item.id);
+			$scope.series[index] = item;
+			alert("update success");
+		}).catch(error => {
+			alert("update fail");
+			console.log("Error", error);
+		});
+	}
+
+    $scope.delete1 = function(item){
+		$http.delete(`/rest/series/${item.id}`).then(resp => {
+			var index = $scope.series.findIndex(p => p.id == item.id);
+			$scope.series.splice(index, 1);
+			$scope.reset1();
 			alert("delete success");
 		}).catch(error => {
 			alert("delete fail");

@@ -6,7 +6,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GeneratedValue; 
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -29,16 +29,36 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
+    
     String name;
     String image;
     Double price;
+
     @Temporal(TemporalType.DATE)
     @Column(name = "Createdate")
     Date createDate = new Date();
+
     Boolean available;
+
+    // Quan hệ với Category (nhiều sản phẩm thuộc một danh mục)
     @ManyToOne
     @JoinColumn(name = "Categoryid")
     Category category;
+
+    // Trường mới cho màu sắc
+    @Column(name = "Color")
+    String color;
+
+    // Trường mới cho dung lượng
+    @Column(name = "Capacity")
+    String capacity;
+
+    // Quan hệ với bảng ProductModels
+    @ManyToOne
+    @JoinColumn(name = "Productmodelid")
+    ProductModel productModel;
+
+    // Quan hệ với OrderDetail (một sản phẩm có thể có nhiều chi tiết đơn hàng)
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<OrderDetail> orderDetails;

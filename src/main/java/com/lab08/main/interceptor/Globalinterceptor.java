@@ -15,6 +15,7 @@ public class Globalinterceptor implements HandlerInterceptor {
     @Autowired
     CategoryService categoryService;
 
+    @SuppressWarnings("null")
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handle,
             ModelAndView modelAndView)

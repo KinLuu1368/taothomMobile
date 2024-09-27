@@ -26,6 +26,11 @@ public class ProductServiceImpl implements ProductService {
         return pdao.findByCategoryId(cid);
     }
 
+    public List<Product> findByProductModelId(int mid) {
+        return pdao.findByProductModelId(mid);
+    }
+
+
     public Product create(Product product) {
         return pdao.save(product);
     }
