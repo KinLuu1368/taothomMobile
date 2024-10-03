@@ -30,7 +30,6 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     
-    String name;
     String image;
     Double price;
 
@@ -45,14 +44,6 @@ public class Product implements Serializable {
     @JoinColumn(name = "Categoryid")
     Category category;
 
-    // Trường mới cho màu sắc
-    @Column(name = "Color")
-    String color;
-
-    // Trường mới cho dung lượng
-    @Column(name = "Capacity")
-    String capacity;
-
     // Quan hệ với bảng ProductModels
     @ManyToOne
     @JoinColumn(name = "Productmodelid")
@@ -62,4 +53,12 @@ public class Product implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<OrderDetail> orderDetails;
+
+    @ManyToOne
+    @JoinColumn(name = "Productcolorsid")
+    private ProductColors productColor;
+
+    @ManyToOne
+    @JoinColumn(name = "Productcapacitiesid")
+    private ProductCapacities productCapacity;
 }

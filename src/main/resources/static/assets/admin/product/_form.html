@@ -14,38 +14,33 @@
                     <div class="col-sm-6">
                         <label for="category" class="form-label">Category</label>
                         <select id="category" ng-model="form.category.id" class="form-select">
+                            <option value="" disabled selected>Select a category</option>
                             <option ng-repeat="c in cates" ng-value="c.id">{{c.name}}</option>
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        <label for="series" class="form-label">Series</label>
-                        <select id="series" ng-model="form.series.id" class="form-select">
-                            <option ng-repeat="c in series" ng-value="c.id">{{c.name}}</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-6">
-                        <label for="productmodel" class="form-label">Product Model</label>
-                        <select id="productModel" ng-model="form.productModel.id" class="form-select">
-                            <option ng-repeat="c in pm" ng-value="c.id">{{c.name}}</option>
+                        <label for="productModel" class="form-label">Product Model</label>
+                        <select id="productModel" ng-model="form.productModel.id" class="form-select" ng-change="onProductModelChange(form.productModel.id)">
+                            <option value="" disabled selected>Select a product model</option>
+                            <option ng-repeat="pm in pm" ng-value="pm.id">{{pm.name}}</option>
                         </select>
                     </div>  
-                    <div class="col-sm-6">
-                        <label for="name" class="form-label">Name</label>
-                        <input id="name" ng-model="form.name" class="form-control" type="text">
-                    </div>                                      
-                </div>                
+                </div>            
                 <div class="row mb-3">
                     <div class="col-sm-6">
-                        <label for="color" class="form-label">Color</label>
-                        <input id="color" ng-model="form.color" class="form-control" type="text">
+                        <label for="productcolors" class="form-label">Color</label>
+                        <select id="productcolors" ng-model="form.productColor.id" class="form-select">
+                            <option value="" disabled selected>Select a color</option>
+                            <option ng-repeat="color in availableColors" ng-value="color.id">{{color.color}}</option>
+                        </select>
                     </div>
                     <div class="col-sm-6">
-                        <label for="capacity" class="form-label">Storage</label>
-                        <input id="capacity" ng-model="form.capacity" class="form-control" type="text">
+                        <label for="productCapacities" class="form-label">Storage (GB)</label>
+                        <select id="productCapacities" ng-model="form.productCapacity.id" class="form-select">
+                            <option value="" disabled selected>Select storage capacity</option>
+                            <option ng-repeat="capacity in availableCapacities" ng-value="capacity.id">{{capacity.capacity}}</option>
+                        </select>
                     </div>
-                    
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-6">
@@ -55,7 +50,7 @@
                     </div>
                     <div class="col-sm-6">
                         <label for="price" class="form-label">Price</label>
-                        <input id="price" ng-model="form.price" class="form-control" type="number" step="0.01">
+                        <input id="price" ng-model="form.price" class="form-control" type="number" step="0.01" placeholder="Enter price">
                     </div>
                 </div>
                 <div class="row mb-3">

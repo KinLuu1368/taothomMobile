@@ -44,4 +44,12 @@ public class ProductModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "Seriesid")
     Series series;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "productModel")
+    private List<ProductColors> productColors;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "productModel")
+    private List<ProductCapacities> productCapacities;
 }

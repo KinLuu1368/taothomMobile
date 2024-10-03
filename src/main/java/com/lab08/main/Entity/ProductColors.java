@@ -10,28 +10,21 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+
 import lombok.Data;
 
 @SuppressWarnings("serial")
 @Data
 @Entity
-@Table(name = "Orderdetails")
-public class OrderDetail implements Serializable {
+@Table(name = "Productcolors")
+public class ProductColors implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    Double price;
-    Integer quantity;
+    private Integer id;
+
+    private String color;
 
     @ManyToOne
-    @JoinColumn(name = "Productid")
-    Product product;
-
-    @ManyToOne
-    @JoinColumn(name = "Orderid")
-    Order order;
-
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private Account user;
+    @JoinColumn(name = "Productmodelid")
+    private ProductModel productModel;
 }

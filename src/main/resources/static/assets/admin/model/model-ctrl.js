@@ -5,6 +5,12 @@ app.controller("model-ctrl", function($scope, $http) {
 	$scope.series =[]
 	$scope.Sform = {}
 
+	$scope.colors = []
+	$scope.colorform = {}
+
+	$scope.caps = []
+	$scope.capform = {}
+
     $scope.initialize = function() {
         $http.get("/rest/ProductModel").then(resp => {
             $scope.items = resp.data;
@@ -12,6 +18,14 @@ app.controller("model-ctrl", function($scope, $http) {
 
 		$http.get("/rest/series").then(resp => {
             $scope.series = resp.data;
+        });
+
+		$http.get("/rest/productcolors").then(resp => {
+            $scope.colors = resp.data;
+        });
+
+		$http.get("/rest/productcapacities").then(resp => {
+            $scope.caps = resp.data;
         });
 
         console.log(JSON.stringify($scope.items))
@@ -76,8 +90,8 @@ app.controller("model-ctrl", function($scope, $http) {
 			console.log("Error", error);
 		});
 	}
-
-	// Series controller
+      
+// Series controller
 	$scope.edit1 = function(item) {
         $scope.Sform = angular.copy(item);
     }
@@ -113,10 +127,106 @@ app.controller("model-ctrl", function($scope, $http) {
 	}
 
     $scope.delete1 = function(item){
-		$http.delete(`/rest/series/${item.id}`).then(resp => {
+		$http.delete(`/rest/productcolors/${item.id}`).then(resp => {
 			var index = $scope.series.findIndex(p => p.id == item.id);
 			$scope.series.splice(index, 1);
 			$scope.reset1();
+			alert("delete success");
+		}).catch(error => {
+			alert("delete fail");
+			console.log("Error", error);
+		});
+	}
+
+	// color controller
+	$scope.edit2 = function(item) {
+        $scope.colorform = angular.copy(item);
+    }
+
+    $scope.reset2 = function() {
+        $scope.colorform = {};
+    }
+
+    $scope.create2 = function() {
+        var item = angular.copy($scope.colorform)
+        console.log(item);
+        $http.post(`/rest/productcolors`, item).then(resp => {
+            $scope.colors.push(resp.data)
+            $scope.reset2()
+            alert("create success")
+        }).catch(error => {
+            alert("create fail")
+			$scope.reset2()
+            console.log(error)
+        })
+    }
+
+    $scope.update2 = function(){
+		var item = angular.copy($scope.colorform);
+		$http.put(`/rest/productcolors/${item.id}`, item).then(resp => {
+			var index = $scope.colors.findIndex(p => p.id == item.id);
+			$scope.colors[index] = item;
+            $scope.reset2()
+			alert("update success");
+		}).catch(error => {
+			alert("update fail");
+			console.log("Error", error);
+		});
+	}
+
+    $scope.delete2 = function(item){
+		$http.delete(`/rest/productcolors/${item.id}`).then(resp => {
+			var index = $scope.colors.findIndex(p => p.id == item.id);
+			$scope.colors.splice(index, 1);
+			$scope.reset2();
+			alert("delete success");
+		}).catch(error => {
+			alert("delete fail");
+			console.log("Error", error);
+		});
+	}
+
+	// capacity controller
+	$scope.edit3 = function(item) {
+        $scope.capform = angular.copy(item);
+    }
+
+    $scope.reset3 = function() {
+        $scope.capform = {};
+    }
+
+    $scope.create3 = function() {
+        var item = angular.copy($scope.capform)
+        console.log(item);
+        $http.post(`/rest/productcapacities`, item).then(resp => {
+            $scope.caps.push(resp.data)
+            $scope.reset3()
+            alert("create success")
+        }).catch(error => {
+            alert("create fail")
+			$scope.reset3()
+            console.log(error)
+        })
+    }
+
+    $scope.update3 = function(){
+		var item = angular.copy($scope.capform);
+		$http.put(`/rest/productcapacities/${item.id}`, item).then(resp => {
+			var index = $scope.caps.findIndex(p => p.id == item.id);
+			$scope.caps[index] = item;
+            $scope.reset3()
+			alert("update success");
+		}).catch(error => {
+			alert("update fail");
+			console.log("Error", error);
+		});
+	}
+
+    $scope.delete3 = function(item){
+		$http.delete(`/rest/productcapacities/${item.id}`).then(resp => {
+			var index = $scope.caps.findIndex(p => p.id == item.id);
+			$scope.caps.splice(index, 1);
+			$scope.reset3();
 			alert("delete success");
 		}).catch(error => {
 			alert("delete fail");

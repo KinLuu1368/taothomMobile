@@ -4,93 +4,176 @@
         <h5 class="mb-0">Model Management</h5>
     </div>
     <div class="card-body">
-        <!-- Add Series Form -->
-        <div class="mb-3">
-            <h6 class="card-title">Series Details</h6>
-            <form ng-submit="addSeries()">
-                <div class="row">
-                    <div class="col-md-6 mb-2">
-                        <label for="seriesID" class="form-label">ID</label>
-                        <input type="text" id="seriesID" ng-model="Sform.id" class="form-control" disabled>
-                    </div>
-                    <div class="col-md-6 mb-2">
-                        <label for="categoryName" class="form-label">Series Name</label>
-                        <input type="text" id="seriesName" ng-model="Sform.name" class="form-control" required>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-end">
-                    <button ng-click="create1()" class="btn btn-primary me-2">
-                        <i class="bi bi-plus"></i> Create
-                    </button>
-                    <button ng-click="update1()" class="btn btn-success me-2">
-                        <i class="bi bi-save"></i> Update
-                    </button>
-                    <button ng-click="delete1(Sform)" class="btn btn-danger me-2">
-                        <i class="bi bi-trash"></i> Delete
-                    </button>
-                    <button ng-click="reset1()" class="btn btn-info">
-                        <i class="bi bi-arrow-clockwise"></i> Reset
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <hr>
-
         <div class="row">
-            <h6 class="card-title mb-2">Product Model Details</h6>
-            <div class="col-sm-4 text-center">
-                <label for="image">
-                    <img ng-src="{{'/assets/images/' + form.image}}" class="img-fluid" style="max-height: 200px;">
-                </label>
+            <!-- Add Series Form -->
+            <div class="mb-3 col-sm-4">
+                <h6 class="card-title">Series Details</h6>
+                <form ng-submit="addSeries()">
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <label for="seriesID" class="form-label">ID</label>
+                            <input type="text" id="seriesID" ng-model="Sform.id" class="form-control" disabled>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label for="categoryName" class="form-label">Series Name</label>
+                            <input type="text" id="seriesName" ng-model="Sform.name" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button ng-click="create1()" class="btn btn-primary me-2">
+                            <i class="bi bi-plus"></i> Create
+                        </button>
+                        <button ng-click="update1()" class="btn btn-success me-2">
+                            <i class="bi bi-save"></i> Update
+                        </button>
+                        <button ng-click="delete1(Sform)" class="btn btn-danger me-2">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                        <button ng-click="reset1()" class="btn btn-info">
+                            <i class="bi bi-arrow-clockwise"></i> Reset
+                        </button>
+                    </div>
+                </form>
             </div>
 
             <div class="col-sm-8">
-                <!-- Add Model Form -->
-                <div class="mb-3">
-                    <form ng-submit="addCategory()">
+                <div class="row">
+                    <h6 class="card-title mb-2">Product Model Details</h6>
+                    <div class="col-sm-4 text-center">
+                        <label for="image">
+                            <img ng-src="{{'/assets/images/' + form.image}}" class="img-fluid"
+                                style="max-height: 200px;">
+                        </label>
+                    </div>
+
+                    <div class="col-sm-8">
+                        <!-- Add Model Form -->
+                        <div class="mb-3">
+                            <form ng-submit="addCategory()">
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <label for="categoryID" class="form-label">ID</label>
+                                        <input type="text" id="categoryID" ng-model="form.id" class="form-control"
+                                            disabled>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label for="categoryName" class="form-label">Series</label>
+                                        <select id="series" ng-model="form.series.id" class="form-select">
+                                            <option ng-repeat="c in series" ng-value="c.id">{{c.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <label for="categoryName" class="form-label">Model Name</label>
+                                        <input type="text" id="categoryName" ng-model="form.name" class="form-control"
+                                            required>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label for="categoryName" class="form-label">Base Price</label>
+                                        <input type="text" id="categoryName" ng-model="form.price" class="form-control"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-2">
+                                        <label for="imageUpload" class="form-label">Image</label>
+                                        <input type="file" class="form-control" id="imageUpload"
+                                            onchange="angular.element(this).scope().imageChanged(this.files)">
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button ng-click="create()" class="btn btn-primary me-2">
+                                        <i class="bi bi-plus"></i> Create
+                                    </button>
+                                    <button ng-click="update()" class="btn btn-success me-2">
+                                        <i class="bi bi-save"></i> Update
+                                    </button>
+                                    <button ng-click="delete(form)" class="btn btn-danger me-2">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </button>
+                                    <button ng-click="reset()" class="btn btn-info">
+                                        <i class="bi bi-arrow-clockwise"></i> Reset
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <!-- Color detail -->
+                <div class="col-sm-6 mb-3">
+                    <h6 class="card-title">Color Details</h6>
+                    <form ng-submit="addColor()">
                         <div class="row">
-                            <div class="col-md-6 mb-2">
-                                <label for="categoryID" class="form-label">ID</label>
-                                <input type="text" id="categoryID" ng-model="form.id" class="form-control" disabled>
+                            <div class="col-md-4 mb-2">
+                                <label for="seriesID" class="form-label">ID</label>
+                                <input type="text" id="seriesID" ng-model="colorform.id" class="form-control" disabled>
                             </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="categoryName" class="form-label">Series</label>
-                                <select id="series" ng-model="form.series.id" class="form-select">
-                                    <option ng-repeat="c in series" ng-value="c.id">{{c.name}}</option>
+                            <div class="col-md-4 mb-2">
+                                <label for="productmodel" class="form-label">Model</label>
+                                <select id="color" ng-model="colorform.productModel.id" class="form-select">
+                                    <option ng-repeat="c in items" ng-value="c.id">{{c.name}}</option>
                                 </select>
                             </div>
-                        </div>  
-                        <div class="row">
-                            <div class="col-md-6 mb-2">
-                                <label for="categoryName" class="form-label">Model Name</label>
-                                <input type="text" id="categoryName" ng-model="form.name" class="form-control"
-                                    required>
-                            </div>                            
-                            <div class="col-md-6 mb-2">
-                                <label for="categoryName" class="form-label">Base Price</label>
-                                <input type="text" id="categoryName" ng-model="form.price" class="form-control"
+                            <div class="col-md-4 mb-2">
+                                <label for="categoryName" class="form-label">Color</label>
+                                <input type="text" id="colorName" ng-model="colorform.color" class="form-control"
                                     required>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="mb-2">
-                                <label for="imageUpload" class="form-label">Image</label>
-                                <input type="file" class="form-control" id="imageUpload"
-                                    onchange="angular.element(this).scope().imageChanged(this.files)">
-                            </div>                            
-                        </div>
                         <div class="d-flex justify-content-end">
-                            <button ng-click="create()" class="btn btn-primary me-2">
+                            <button ng-click="create2()" class="btn btn-primary me-2">
                                 <i class="bi bi-plus"></i> Create
                             </button>
-                            <button ng-click="update()" class="btn btn-success me-2">
+                            <button ng-click="update2()" class="btn btn-success me-2">
                                 <i class="bi bi-save"></i> Update
                             </button>
-                            <button ng-click="delete(form)" class="btn btn-danger me-2">
+                            <button ng-click="delete2(colorform)" class="btn btn-danger me-2">
                                 <i class="bi bi-trash"></i> Delete
                             </button>
-                            <button ng-click="reset()" class="btn btn-info">
+                            <button ng-click="reset2()" class="btn btn-info">
+                                <i class="bi bi-arrow-clockwise"></i> Reset
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Capacity Detail -->
+                <div class="col-sm-6">
+                    <h6 class="card-title">Capacity Details</h6>
+                    <form ng-submit="addCap()">
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <label for="capID" class="form-label">ID</label>
+                                <input type="text" id="capID" ng-model="capform.id" class="form-control" disabled>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="productmodel" class="form-label">Model</label>
+                                <select id="cap" ng-model="capform.productModel.id" class="form-select">
+                                    <option ng-repeat="c in items" ng-value="c.id">{{c.name}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="categoryName" class="form-label">Capacity</label>
+                                <input type="text" id="capName" ng-model="capform.capacity" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button ng-click="create3()" class="btn btn-primary me-2">
+                                <i class="bi bi-plus"></i> Create
+                            </button>
+                            <button ng-click="update3()" class="btn btn-success me-2">
+                                <i class="bi bi-save"></i> Update
+                            </button>
+                            <button ng-click="delete3(capform)" class="btn btn-danger me-2">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                            <button ng-click="reset3()" class="btn btn-info">
                                 <i class="bi bi-arrow-clockwise"></i> Reset
                             </button>
                         </div>
@@ -98,7 +181,6 @@
                 </div>
             </div>
             <hr>
-
             <!-- Series List -->
             <h6 class="card-title">Series List</h6>
             <table class="table table-striped">
@@ -143,7 +225,8 @@
                 <tbody>
                     <tr ng-repeat="item in items">
                         <td>{{item.id}}</td>
-                        <td><img src="/assets/images/{{item.image}}" class="img-fluid" style="width: 80px;" alt="{{item.name}}"></td>
+                        <td><img src="/assets/images/{{item.image}}" class="img-fluid" style="width: 80px;"
+                                alt="{{item.name}}"></td>
                         <td>{{item.series.name}}</td>
                         <td>{{item.name}}</td>
                         <td>{{item.price | number : 0}} đ</td>
@@ -160,6 +243,70 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- Color List -->
+                    <h6 class="card-title">Color List</h6>
+                    <table class="table table-striped">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <th>ID</th>
+                                <th>Model</th>
+                                <th>Color</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in colors">
+                                <td>{{item.id}}</td>
+                                <td>{{item.productModel.name}}</td>
+                                <td>{{item.color}}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
+                                        <button ng-click="edit2(item)" class="btn btn-warning">
+                                            <i class="bi bi-pencil"></i> Edit
+                                        </button>
+                                        <button ng-click="delete2(item)" class="btn btn-danger">
+                                            <i class="bi bi-trash"></i> Delete
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-6">
+                    <!-- Capacity List -->
+                    <h6 class="card-title">Capacities List</h6>
+                    <table class="table table-striped">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <th>ID</th>
+                                <th>Model</th>
+                                <th>Capacities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in caps">
+                                <td>{{item.id}}</td>
+                                <td>{{item.productModel.name}}</td>
+                                <td>{{item.capacity}}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
+                                        <button ng-click="edit3(item)" class="btn btn-warning">
+                                            <i class="bi bi-pencil"></i> Edit
+                                        </button>
+                                        <button ng-click="delete3(item)" class="btn btn-danger">
+                                            <i class="bi bi-trash"></i> Delete
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
