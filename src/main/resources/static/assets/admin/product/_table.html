@@ -9,7 +9,6 @@
                     <th>ID</th>
                     <th>Image</th>
                     <th>Category</th>
-                    <th>Series</th>
                     <th>Model</th>
                     <th>Color</th>
                     <th>Storage</th>
@@ -24,10 +23,9 @@
                     <td>{{item.id}}</td>
                     <td><img src="/assets/images/{{item.image}}" class="img-fluid" style="width: 80px;" alt="{{item.name}}"></td>
                     <td>{{item.category.name}}</td>
-                    <td>{{item.productModel.series.name}}</td>
                     <td>{{item.productModel.name}}</td>
                     <td>{{item.productColor.color}}</td>
-                    <td>{{item.productCapacity.capacity}}</td>
+                    <td>{{item.productCapacity.capacity}}GB</td>
                     <td>{{item.price | number : 0}} đ</td>
                     <td>{{item.createDate | date : 'dd-MM-yyyy'}}</td>                    
                     <td>{{item.available ? 'Yes' : 'No'}}</td>

@@ -8,16 +8,16 @@
             data-bs-ride="carousel">
             <div class="carousel-inner" data-bs-interval="100">
                 <div class="carousel-item active">
-                    <img src="/assets/images/AD/1001.jpg" class="d-block w-100" alt="...">
+                    <img src="/assets/image/AD/1001.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="/assets/images/AD/1002.jpg" class="d-block w-100" alt="...">
+                    <img src="/assets/image/AD/1002.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="/assets/images/AD/1003.jpg" class="d-block w-100" alt="...">
+                    <img src="/assets/image/AD/1003.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="/assets/images/AD/1004.jpg" class="d-block w-100" alt="...">
+                    <img src="/assets/image/AD/1004.jpg" class="d-block w-100" alt="...">
                 </div>
             </div>
         </div>
@@ -29,50 +29,50 @@
                 <div class="h-100 p-4 rounded-3 text-center">
                     <h2>DÒNG SẢN PHẨM ĐANG PHÂN PHỐI</h2>
                     <div class="card-group mb-3">
-                        <div class="col-3 p-2">
+                        <div class="col-md-3 p-2">
                             <a href="/product/list?cid=1001">
                                 <div class="card border-0 border rounded-4">
                                     <div class="card-body" id="itemShow">
-                                        <img src="/assets/images/Product/iphone/12.jpg" alt="">
+                                        <img src="/assets/image/Product/iphone/13ser.jpg" alt="">
                                     </div>
                                     <div class="card-footer text-muted text-center bg-transparent border border-0">
-                                        <h5>iPhone</h5>
+                                        <h5>iPhone 13 Series</h5>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-3 p-2">
+                        <div class="col-md-3 p-2">
                             <a href="/product/list?cid=1002">
                                 <div class="card border-0 border rounded-4">
                                     <div class="card-body" id="itemShow">
-                                        <img src="/assets/images/Product/ipad.png" alt="">
+                                        <img src="/assets/image/Product/iphone/14ser.jpg" alt="">
                                     </div>
                                     <div class="card-footer text-muted text-center bg-transparent border border-0">
-                                        <h5>iPad</h5>
+                                        <h5>iPhone 14 Series</h5>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-3 p-2">
+                        <div class="col-md-3 p-2">
                             <a href="/product/list?cid=1003">
                                 <div class="card border-0 border rounded-4">
                                     <div class="card-body" id="itemShow">
-                                        <img src="/assets/images/Product/macbook.jpeg" alt="">
+                                        <img src="/assets/image/Product/iphone/15ser.jpg" alt="">
                                     </div>
                                     <div class="card-footer text-muted text-center bg-transparent border border-0">
-                                        <h5>Macbook</h5>
+                                        <h5>iPhone 15 Series</h5>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-3 p-2">
+                        <div class="col-md-3 p-2">
                             <a href="/product/list?cid=1004">
                                 <div class="card border-0 border rounded-4">
                                     <div class="card-body" id="itemShow">
-                                        <img src="/assets/images/Product/phukien.jpg" alt="">
+                                        <img src="/assets/image/Product/iphone/16ser.png" alt="">
                                     </div>
                                     <div class="card-footer text-muted text-center bg-transparent border border-0">
-                                        <h5>Phụ Kiện</h5>
+                                        <h5>iPhone 16 Series</h5>
                                     </div>
                                 </div>
                             </a>
@@ -81,11 +81,45 @@
                 </div>
             </div>
         </div>
-
-
- 
-
-
+        <!-- Sản phẩm theo category -->
+        <div class="container border rounded-5 mt-4 border-0">
+            <div class="row align-items-md-stretch">
+                <div class="h-100 p-4 rounded-3 text-center" th:each="category : ${categories}">
+                    <h2 class="text-primary mb-4" th:text="${category.name}">Tên Danh Mục</h2>
+                    <div class="card-group mb-3" th:if="${not #lists.isEmpty(category.products)}">
+                        <div class="col-md-3 p-2" th:each="product,  iterStat : ${category.products}"
+                            th:if="${iterStat.index < 4}">
+                            <a th:href="@{/product/detail/{id}(id=${product.id})}">
+                                <div class="card shadow-sm border rounded-4">
+                                    <div class="card-body" id="itemShow" style="height: 250px;">
+                                        <img class="img-fluid rounded mx-auto d-block" style="max-height: 200px;"
+                                            th:src="@{/assets/images/{image}(image=${product.image})}" alt="" />
+                                    </div>
+                                    <div class="card-footer text-muted text-center bg-transparent border border-0">
+                                        <h5 class="card-title text-dark" th:text="${product.productModel.name} + ' ' + ${product.productCapacity.capacity}+'GB | VN/A'">Tên sản
+                                            phẩm</h5>
+                                        <p class="card-text text-danger fw-bold mb-0">[[*{#numbers.formatDecimal(product.price, 0,
+                                            'COMMA', 0, 'POINT')}]] đ</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        
+                    </div>
+                    <div th:if="${#lists.isEmpty(category.products)}">
+                        <p>Sản phẩm đang cập nhật</p>
+                    </div>
+                    <div class="text-center justify-content-center">
+                        <a th:href="@{/product/list?cid={id}(id=${category.id}) }">
+                            <button class="btn btn-warning px-4 mt-4 text-white" type="button">
+                                Xem tất cả
+                            </button>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 
     </main>
 </body>

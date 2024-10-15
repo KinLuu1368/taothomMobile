@@ -8,8 +8,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -33,17 +31,9 @@ public class ProductModel implements Serializable {
     @Column(name = "Image", nullable = false, columnDefinition = "nvarchar(50) default 'ModelDefault.jpg'")
     String image; // Hình ảnh đại diện cho model
 
-    @Column(name = "Price", nullable = false)
-    Double price;
-
     @JsonIgnore
     @OneToMany(mappedBy = "productModel")
     List<Product> products; // Quan hệ 1-N với bảng Product
-
-    // Quan hệ với Series (nhiều sản phẩm thuộc một series)
-    @ManyToOne
-    @JoinColumn(name = "Seriesid")
-    Series series;
 
     @JsonIgnore
     @OneToMany(mappedBy = "productModel")

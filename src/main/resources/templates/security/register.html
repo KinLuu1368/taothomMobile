@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Đăng Ký Tài Khoản</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body ng-app="app">
+    <main class="container d-flex justify-content-center align-items-center mt-5">
+        <form ng-controller="ctrl" ng-submit="register()" class="w-100" style="max-width: 500px;">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h5 class="mb-0">ĐĂNG KÝ TÀI KHOẢN</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Tài khoản:</label>
+                        <input id="username" name="username" ng-model="form.username" class="form-control" required
+                            ng-change="suggestFullname()">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mật khẩu:</label>
+                        <input id="password" name="password" type="password" ng-model="form.password"
+                            class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Nhập lại mật khẩu:</label>
+                        <input id="confirmPassword" name="confirmPassword" type="password"
+                            ng-model="form.confirmPassword" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fullname" class="form-label">Tên đầy đủ:</label>
+                        <input id="fullname" name="fullname" ng-model="form.fullname" class="form-control" required>
+
+                        <!-- Phần hiển thị gợi ý dưới ô nhập -->
+                        <div ng-if="suggestedFullname" class="suggestion" style="cursor: pointer; color: blue;"
+                            ng-click="applySuggestion()">
+                            Tên Gợi ý: {{ suggestedFullname }}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input id="email" name="email" ng-model="form.email" type="email" class="form-control" required>
+                        <button type="button" class="btn btn-primary mt-2" ng-click="sendCode()">Lấy mã xác
+                            nhận</button>
+                    </div>
+                    <div class="mb-3">
+                        <label for="verificationCode" class="form-label">Mã xác nhận:</label>
+                        <input id="verificationCode" name="verificationCode" ng-model="form.verificationCode"
+                            class="form-control" required>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <button type="submit" class="btn btn-success">Đăng ký</button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+
+
+    <script>
+        const app = angular.module("app", []);
+
+        app.controller("ctrl", function ($scope, $http) {
+            $scope.form = {};
+
+//-------------------------------------------------------------------------------------------------------
+
+            // Hàm gửi mã xác nhận qua email
+            $scope.sendCode = function () {
+                if ($scope.form.email) {
+                    $http.post('/rest/accounts/send-code?email=' + $scope.form.email)
+                        .then(resp => {
+                            console.log(resp.data); 
+                            if (resp.data.success) {
+                                alert("Mã xác thực đã được gửi tới email!");
+                            } else {
+                                alert("Không thể gửi mã xác nhận. Lỗi từ máy chủ!");
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error); 
+                            alert("Không thể gửi mã xác nhận!");
+                        });
+                } else {
+                    alert("Vui lòng nhập email!");
+                }
+            };
+
+ //------------------------------------------------------------------------------------------------           
+
+            // hàm đăng ký tài khoản có check form
+            $scope.register = async function () {
+                try {
+                    if ($scope.form.password !== $scope.form.confirmPassword) {
+                        alert("Mật khẩu không khớp, vui lòng nhập lại.");
+                        return;
+                    }
+
+                    if ($scope.form.username && $scope.form.password && $scope.form.fullname && $scope.form.email && $scope.form.verificationCode) {
+                        const item = angular.copy($scope.form);
+                        const resp = await $http.post('/rest/accounts/register?code=' + $scope.form.verificationCode, item);
+                        console.log(resp.data);
+
+                        if (resp.data.success) {
+                            alert("Đăng ký thành công 🎉!");
+                            $scope.reset();
+                            window.location.href = "/security/login/form";
+                        } else {
+                            alert("Mã xác thực không chính xác hoặc thông tin không hợp lệ!");
+                        }
+                    } else {
+                        alert("Vui lòng điền đầy đủ thông tin!");
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert("Lỗi không xác định!");
+                }
+            };
+
+//-------------------------------------------------------------------------------------------
+
+            $scope.suggestedFullname = null;
+
+            // Hàm tạo gợi ý tên
+            $scope.suggestFullname = function () {
+                if ($scope.form.username) {
+                    const username = $scope.form.username;
+                    const capitalizedFullname = username.charAt(0).toUpperCase() + username.slice(1);
+                    const randomDigits = Math.floor(Math.random() * (99999 - 1 + 1) + 1).toString();
+                    $scope.suggestedFullname = capitalizedFullname + " User " + randomDigits;
+                } else {
+                    $scope.suggestedFullname = null;
+                }
+            };
+
+           // hàm chọn tên gợi ý nè
+            $scope.applySuggestion = function () {
+                if ($scope.suggestedFullname) {
+                    $scope.form.fullname = $scope.suggestedFullname;
+                    $scope.suggestedFullname = null;
+                }
+            };
+
+
+//---------------------------------------------------------------------------------------------------------
+            // Hàm reset form
+            $scope.reset = function () {
+                $scope.form = {};
+            };
+        });
+    </script>
+</body>
+
+</html>

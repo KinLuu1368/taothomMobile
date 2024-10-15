@@ -9,49 +9,75 @@
 </head>
 
 <body>
-    <main th:object="${item}" class="poly-item-detail container py-4">
-        <div class="row g-4">
+    <main  th:object="${item}"  class="poly-item-detail container py-4">        
+        <h5 class="list-group-item fw-bold" th:text="*{productModel.name} + ' ' +*{productCapacity.capacity}+ 'GB CHÍNH HÃNG VN/A'"></h5>
+        <hr>
+        <div class="row g-4" >
             <div class="col-md-6">
-                <div class="card h-100 shadow-sm">
+                <div class="card h-100 shadow-sm rounded-5">
                     <div class="card-body text-center p-4">
-                        <img th:src="@{|/assets/images/*{image}|}" class="img-fluid rounded">
+                        <img th:src="@{|/assets/images/${item.image}|}" class="img-fluid rounded" alt="Product Image">
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card h-100 shadow-sm">
+                <div>
+
+                </div>
+                <div class="card h-100 shadow border-0">
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item fw-bold" th:text="*{name}"></li>
-                            <li class="list-group-item" th:text="'Giá: ' + *{price}"></li>
-                            <li class="list-group-item" th:text="'Ngày tạo: ' + *{createDate}"></li>
-                            <li class="list-group-item" th:text="'Danh mục: ' + *{category.name}"></li>
+                            Giá chính thức:
+                            <li class="list-group-item text-center">                                
+                                <span class="fw-bold" style="font-size: 1.75rem; color: red;">
+                                    Giá: [[*{#numbers.formatDecimal(price, 0, 'COMMA', 0, 'POINT')}]] đ
+                                </span>
+                            </li>
+                            <li class="list-group-item" th:text="'Màu: ' + *{productColor.color}"></li>
+                            <li class="list-group-item" th:text="'Dung lượng: ' + *{productCapacity.capacity} + 'GB'"></li>
+                            
                         </ul>
                     </div>
-                    <div class="card-footer text-end bg-white">
-                        <button class="btn btn-success" th:attr="ng-click=@{|cart.add(${id})|}">
-                            <i class="bi bi-cart-plus"></i> Thêm vào giỏ
+                    <div class="card h-100 p-3 shadow border-0">
+                        <h5>Màu sắc và dung lượng</h5>
+                        <div class="mt-2 row">
+                            <div class="mb-2 col-sm-6" th:each="product : ${same}">
+                                    <a th:href="@{/product/detail/{id}(id=${product.id})}" class="list-group-item bg-light p-3 shadow-sm rounded-3 d-flex align-items-center" style="background-color: #f8f9fa;">
+                                        <!-- Hình ảnh sản phẩm -->
+                                        <img th:src="@{|/assets/images/${product.image}|}" alt="product image" class="img-thumbnail me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                                        
+                                        <!-- Thông tin sản phẩm -->
+                                        <div>
+                                            <div class="fw-bold" th:text="${product.productCapacity.capacity + 'GB - ' + product.productColor.color}"></div>
+                                            <div class="text-danger" style="font-size: 1.2rem; font-weight: bold;" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' đ'}"></div>
+                                        </div>
+                                    </a>                            
+                            </div>
+                        </div>                    
+                    </div>
+                    <div class="card-footer bg-light text-end">
+                        <button class="btn btn-danger btn-lg rounded-pill shadow" th:attr="ng-click=@{|cart.add(${id})|}">
+                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">Hàng cùng loại</h5>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li th:each="p : *{category.products}" class="list-group-item">
-                                <a th:href="@{|/product/detail/${p.id}|}" th:text="${p.name}" class="text-decoration-none"></a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="col-md-6">
+                <div class="card h-100 p-3 shadow border-0">
+                    <div class="card-header"><h5>Thông tin sản phẩm</h5></div> 
+                    <ul class="p-2" style="list-style-type: none; color: grey;">
+                        <li><span class="bi bi-phone"></span> Máy mới 100% , chính hãng Apple Việt Nam.</li>
+                        <li><span class="bi bi-box"></span> Hộp, Sách hướng dẫn, Cây lấy sim, Cáp Lightning - Type C</li>
+                        <li><span class="bi bi-shield-check"></span> 1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 tháng tại trung tâm bảo hành chính hãng Apple</li>
+                        <li><span class="bi bi-check-all"></span> Giá sản phẩm đã bao gồm VAT</li>
+                    </ul>   
                 </div>
             </div>
+            <div class="col-md-6">
+               
+            </div>
         </div>
+
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

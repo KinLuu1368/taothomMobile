@@ -10,4 +10,6 @@ public interface AccountService {
     List<Account> getAdministrators();
 
     public List<Account> findAll();
+
+    Account create(Account account);
 }

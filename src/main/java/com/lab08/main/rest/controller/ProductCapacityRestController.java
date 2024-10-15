@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lab08.main.Entity.ProductCapacities;
 import com.lab08.main.service.ProductCapacitiesService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @CrossOrigin("*")

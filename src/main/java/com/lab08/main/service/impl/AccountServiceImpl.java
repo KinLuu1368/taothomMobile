@@ -23,6 +23,19 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Account create(Account account) {
+        // Kiem tra trong username
+        if (adao.findById(account.getUsername()).isPresent()) {
+            throw new RuntimeException("Username đã ton tai!");
+        }
+        // Kiem tra trong email
+        if (adao.findByEmail(account.getEmail()).isPresent()) {
+            throw new RuntimeException("Email da ton tai!");
+        }
+        return adao.save(account);
+    }
+
+    @Override
     public List<Account> findAll() {
         return adao.findAll();
     }

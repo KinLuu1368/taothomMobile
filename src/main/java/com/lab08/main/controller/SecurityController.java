@@ -11,6 +11,11 @@ public class SecurityController {
         model.addAttribute("message", "Vui long dang nhap!");
         return "security/login";
     }
+    @RequestMapping("/security/register/form")
+    public String registerForm(Model model) {
+        model.addAttribute("message", "Vui long dang ký!");
+        return "security/register";
+    }
 
     @RequestMapping("/security/login/success")
     public String loginSuccess(Model model) {

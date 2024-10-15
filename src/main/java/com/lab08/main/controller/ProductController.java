@@ -1,7 +1,9 @@
 package com.lab08.main.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lab08.main.Entity.Product;
-import com.lab08.main.Entity.ProductModel;
-import com.lab08.main.Entity.Series;
-import com.lab08.main.service.SeriesService;
 import com.lab08.main.service.ProductModelService;
 import com.lab08.main.service.ProductService;
 
@@ -24,33 +23,56 @@ public class ProductController {
 
     @Autowired
     ProductModelService productModelService;
-
-    @Autowired
-    SeriesService seriesService;
+    
+    public List<Product> getLowList(List<Product> products) {
+        // Lọc sản phẩm để chỉ lấy sản phẩm có giá thấp nhất cho mỗi ProductModel và ProductCapacity
+        Map<Integer, Map<Integer, Product>> lowestPriceProductsMap = products.stream()
+            .collect(Collectors.groupingBy(
+                product -> product.getProductModel().getId(),  // Nhóm theo ProductModel ID
+                Collectors.toMap(
+                    product -> product.getProductCapacity().getId(),  // Nhóm tiếp theo theo ProductCapacity ID
+                    product -> product, // Giá trị là sản phẩm
+                    (existing, replacement) -> existing.getPrice() < replacement.getPrice() ? existing : replacement // Giữ sản phẩm có giá thấp hơn
+                )
+            ));
+    
+        // Chuyển đổi Map thành List bằng cách trích xuất các sản phẩm từ map lồng nhau
+        List<Product> lowestPriceProducts = lowestPriceProductsMap.values().stream()
+            .flatMap(capacityMap -> capacityMap.values().stream())  // Lấy tất cả sản phẩm từ từng Capacity group
+            .collect(Collectors.toList());
+        
+        return lowestPriceProducts;
+    }
+    
+    
 
     @RequestMapping("/product/list")
-    public String list(Model model, @RequestParam("cid") Optional<String> cid, @RequestParam("mid") Optional<String> mid,  @RequestParam("sid") Optional<String> sid) {
-        List<Series> sList = seriesService.findAll();
-        model.addAttribute("sList", sList);
+    public String list(Model model, @RequestParam("cid") Optional<String> cid) {
         if (cid.isPresent()) {
-            List<Product> list = productService.findByCategoryId(cid.get());
-            model.addAttribute("items", list);
-        } else if (mid.isPresent()) {
-            // Tìm sản phẩm theo model id
-            Integer midInteger = Integer.valueOf(mid.get());
-            List<Product> list = productService.findByProductModelId(midInteger);
-            model.addAttribute("items", list);
+            List<Product> products = productService.findByCategoryId(cid.get());
+            List<Product> lowestPriceProducts = getLowList(products);
+            model.addAttribute("items", lowestPriceProducts);
+            for(Product product : lowestPriceProducts){
+                System.out.println(product.getId());
+            }
+            return "product/list";
         } else {
-            List<ProductModel> list = productModelService.findAll();
-            model.addAttribute("items", list);
+            List<Product> products = productService.findAll();
+            List<Product> lowestPriceProducts = getLowList(products);
+
+            model.addAttribute("items", lowestPriceProducts);
+            return "product/list";
         }
-        return "product/list";
     }
 
     @RequestMapping("/product/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id) {
         Product item = productService.findById(id);
         model.addAttribute("item", item);
+        model.addAttribute("image", item.getImage());
+        int productModelId = item.getProductModel().getId();
+        List<Product> list = productService.findByProductModelId(productModelId);
+        model.addAttribute("same", list);
         return "product/detail";
     }
 }
