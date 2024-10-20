@@ -17,12 +17,18 @@ CREATE TABLE Accounts (
     Email NVARCHAR(50) NOT NULL,
     Photo NVARCHAR(50) DEFAULT 'default.png'
 );
+INSERT INTO Accounts (Username, Password, Fullname, Email)
+VALUES ('admin', '123', 'Administrator', 'admin@example.com');
 
 -- Tạo bảng Roles (quản lý vai trò)
 CREATE TABLE Roles (
     Id NVARCHAR(10) NOT NULL PRIMARY KEY,
     Name NVARCHAR(50) NOT NULL
 );
+INSERT INTO Roles (Id, Name) values
+	('DIRE', 'Director'),
+	('STAF', 'Staff'),
+	('CUST', 'Customer');
 
 -- Tạo bảng Authorities (liên kết Accounts và Roles)
 CREATE TABLE Authorities (
@@ -30,26 +36,27 @@ CREATE TABLE Authorities (
     Username NVARCHAR(50) NOT NULL,
     RoleId NVARCHAR(10) NOT NULL
 );
+-- Thêm vai trò cho người dùng admin
+INSERT INTO Authorities (Username, RoleId)
+VALUES ('admin', 'DIRE');
 
 -- Tạo bảng Categories (quản lý danh mục sản phẩm)
 CREATE TABLE Categories (
     Id CHAR(4) NOT NULL PRIMARY KEY,
     Name NVARCHAR(50) NOT NULL
 );
+INSERT INTO Categories (id, name) VALUES 
+(1001, 'iPhone 13 Series'),
+(1002, 'iPhone 14 Series'),
+(1003, 'iPhone 15 Series'),
+(1004, 'iPhone 16 Series');
 
--- Tạo bảng Series (quản lý dòng sản phẩm)
-CREATE TABLE Series (
-    Id INT IDENTITY(1,1) PRIMARY KEY,
-    Name NVARCHAR(50) NOT NULL -- Tên dòng sản phẩm (VD: iPhone 12 series)
-);
 
 -- Tạo bảng ProductModel (quản lý model sản phẩm)
 CREATE TABLE ProductModel (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Name NVARCHAR(50) NOT NULL, -- Tên model (VD: Pro, Max, Standard)
     Image NVARCHAR(50) DEFAULT 'ModelDefault.jpg', -- Hình ảnh đại diện
-    Price FLOAT DEFAULT 0, -- Giá sản phẩm
-    SeriesId INT NOT NULL
 );
 
 -- Tạo bảng ProductColors (quản lý màu sắc sản phẩm theo model)
@@ -118,14 +125,10 @@ ALTER TABLE Products
 ADD CONSTRAINT FK_Products_ProductModel FOREIGN KEY (ProductModelId) REFERENCES ProductModel(Id) ON DELETE NO ACTION;
 
 ALTER TABLE Products
-ADD CONSTRAINT FK_Products_ProductColor FOREIGN KEY (ProductColorId) REFERENCES ProductColors(Id) ON DELETE NO ACTION;
+ADD CONSTRAINT FK_Products_ProductColor FOREIGN KEY (ProductColorsId) REFERENCES ProductColors(Id) ON DELETE NO ACTION;
 
 ALTER TABLE Products
-ADD CONSTRAINT FK_Products_ProductCapacity FOREIGN KEY (ProductCapacityId) REFERENCES ProductCapacities(Id) ON DELETE NO ACTION;
-
--- Liên kết bảng ProductModel với Series
-ALTER TABLE ProductModel
-ADD CONSTRAINT FK_ProductModel_Series FOREIGN KEY (SeriesId) REFERENCES Series(Id) ON DELETE NO ACTION;
+ADD CONSTRAINT FK_Products_ProductCapacity FOREIGN KEY (ProductCapacitiesId) REFERENCES ProductCapacities(Id) ON DELETE NO ACTION;
 
 -- Liên kết bảng ProductColors với ProductModel
 ALTER TABLE ProductColors
