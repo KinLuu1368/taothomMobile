@@ -47,14 +47,17 @@ public class ProductController {
     
 
     @RequestMapping("/product/list")
-    public String list(Model model, @RequestParam("cid") Optional<String> cid) {
+    public String list(Model model, @RequestParam("cid") Optional<String> cid, @RequestParam("name") Optional<String> name) {
         if (cid.isPresent()) {
             List<Product> products = productService.findByCategoryId(cid.get());
             List<Product> lowestPriceProducts = getLowList(products);
             model.addAttribute("items", lowestPriceProducts);
-            for(Product product : lowestPriceProducts){
-                System.out.println(product.getId());
-            }
+            return "product/list";
+        } else if (name.isPresent()) {
+            List<Product> products = productService.findByName(name.get());
+            List<Product> lowestPriceProducts = getLowList(products);
+            model.addAttribute("items", lowestPriceProducts);
+
             return "product/list";
         } else {
             List<Product> products = productService.findAll();

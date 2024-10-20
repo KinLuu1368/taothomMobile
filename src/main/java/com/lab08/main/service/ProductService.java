@@ -13,6 +13,8 @@ public interface ProductService {
 
     List<Product> findByProductModelId(int modelId);
 
+    List<Product> findByName(String name);
+
     Product create(Product product);
 
     Product update(Product product);

@@ -4,22 +4,27 @@
 <body>
     <main>
         <!--Ads-->
-        <div id="carouselExampleAutoplaying" class="container carousel slide mx-auto mt-4" style="width: 95%;"
-            data-bs-ride="carousel">
-            <div class="carousel-inner" data-bs-interval="100">
-                <div class="carousel-item active">
-                    <img src="/assets/image/AD/1001.jpg" class="d-block w-100" alt="...">
+        <div class="swiper container-banner mySwiper rounded-4 mt-4" style="width: 95%;">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="\assets\image\AD\1001.webp" alt="">
                 </div>
-                <div class="carousel-item">
-                    <img src="/assets/image/AD/1002.jpg" class="d-block w-100" alt="...">
+                <div class="swiper-slide">
+                    <img src="\assets\image\AD\1002.webp" alt="">
                 </div>
-                <div class="carousel-item">
-                    <img src="/assets/image/AD/1003.jpg" class="d-block w-100" alt="...">
+                <div class="swiper-slide">
+                    <img src="\assets\image\AD\1003.webp" alt="">
                 </div>
-                <div class="carousel-item">
-                    <img src="/assets/image/AD/1004.jpg" class="d-block w-100" alt="...">
+                <div class="swiper-slide">
+                    <img src="\assets\image\AD\1004.webp" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="\assets\image\AD\1005.webp" alt="">
                 </div>
             </div>
+            <div class="next-button swiper-button-next"></div>
+            <div class="prev-button swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
         </div>
 
         <!--jumbotron-->
@@ -96,15 +101,18 @@
                                             th:src="@{/assets/images/{image}(image=${product.image})}" alt="" />
                                     </div>
                                     <div class="card-footer text-muted text-center bg-transparent border border-0">
-                                        <h5 class="card-title text-dark" th:text="${product.productModel.name} + ' ' + ${product.productCapacity.capacity}+'GB | VN/A'">Tên sản
+                                        <h5 class="card-title text-dark"
+                                            th:text="${product.productModel.name} + ' ' + ${product.productCapacity.capacity}+'GB | VN/A'">
+                                            Tên sản
                                             phẩm</h5>
-                                        <p class="card-text text-danger fw-bold mb-0">[[*{#numbers.formatDecimal(product.price, 0,
+                                        <p class="card-text text-danger fw-bold mb-0">
+                                            [[*{#numbers.formatDecimal(product.price, 0,
                                             'COMMA', 0, 'POINT')}]] đ</p>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        
+
                     </div>
                     <div th:if="${#lists.isEmpty(category.products)}">
                         <p>Sản phẩm đang cập nhật</p>
@@ -116,7 +124,7 @@
                             </button>
                         </a>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

@@ -30,6 +30,9 @@ public class ProductServiceImpl implements ProductService {
         return pdao.findByProductModelId(mid);
     }
 
+    public List<Product> findByName(String name) {
+        return pdao.findByName(name);
+    }
 
     public Product create(Product product) {
         return pdao.save(product);

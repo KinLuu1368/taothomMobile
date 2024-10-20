@@ -79,20 +79,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="row" style="width: 100%;">
                     <div class="col-sm-6">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="iPhone 15 Pro Max 256gb"
-                                aria-label="Search">
+                        <form class="d-flex" id="searchForm">
+                            <input class="form-control me-2" type="search" id="searchInput"
+                                placeholder="Tìm sản phẩm..." aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Tìm</button>
                         </form>
                     </div>
                     <div class="col-sm-6">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" th:href="@{/cart/view}"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng <span
+                                <a class="nav-link active" aria-current="page" th:href="@{/cart/view}"><i
+                                        class="fa-solid fa-cart-shopping"></i> Giỏ hàng <span
                                         class="badge bg-info">{{cart.count}}</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/Assignment/contact"><i class="fa-solid fa-phone"></i> Liên hệ</a>
+                                <a class="nav-link active" aria-current="page" href="/Assignment/contact"><i
+                                        class="fa-solid fa-phone"></i> Liên hệ</a>
                             </li>
                             <li class="nav-item" id="accountMenuItem">
                                 <a class="nav-link" href="#" id="accountToggle"><i class="fas fa-user-circle"></i> Tài
@@ -101,7 +103,7 @@
                                     <a class="dropdown-item" th:href="@{/security/login/form}"><i
                                             class="fas fa-sign-in-alt"></i> Đăng nhập</a>
                                     <a class="dropdown-item" th:href="@{/security/register/form}"> <i
-                                            class="fa-regular fa-pen-to-square"></i> Đăng ký</a>                             
+                                            class="fa-regular fa-pen-to-square"></i> Đăng ký</a>
                                     <a class="dropdown-item" th:href="@{/security/logoff}"><i
                                             class="fas fa-sign-out-alt"></i> Đăng xuất</a>
                                     <a class="dropdown-item" th:href="@{/order/list}"><i class="fas fa-box"></i> Đơn
@@ -136,11 +138,12 @@
                                 iPhone 15</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/product/list?cid=1004"><span class="bi bi-phone"></span> 
+                            <a class="nav-link" href="/product/list?cid=1004"><span class="bi bi-phone"></span>
                                 iPhone 16</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/product/list"><span class="bi bi-shop"></span> Tất cả sản phẩm</a>
+                            <a class="nav-link" href="/product/list"><span class="bi bi-shop"></span> Tất cả sản
+                                phẩm</a>
                         </li>
                     </ul>
                 </div>
@@ -149,7 +152,7 @@
     </div>
     <!-- Navbar -->
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.getElementById('accountToggle').addEventListener('click', function (event) {
@@ -164,6 +167,17 @@
             if (!accountMenu.contains(event.target)) {
                 var menu = document.querySelector('.account-menu');
                 menu.style.display = 'none';
+            }
+        });
+
+        document.getElementById('searchForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Ngăn trang reload
+            const query = document.getElementById('searchInput').value.trim();
+            console.log('Từ khóa tìm kiếm:', query);
+
+            // Điều hướng đến trang tìm kiếm
+            if (query) {
+                window.location.href = `/product/list?name=${encodeURIComponent(query)}`;
             }
         });
     </script>
