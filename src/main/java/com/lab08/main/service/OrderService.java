@@ -13,4 +13,8 @@ public interface OrderService {
     List<Order> findAll();
 
     List<Order> findByUsername(String username);
+
+    public void deleteOrderById(Long id);
+
+    public void deleteOrderDetailsByOrderId(Integer orderId);
 }

@@ -31,6 +31,7 @@ public class OrderController {
     @RequestMapping("/order/detail/{id}")
     public String detail(@PathVariable("id") Long id, Model model) {
         model.addAttribute("order", orderService.findById(id));
+        System.out.println(orderService.findById(id).getOrderDetails().get(0).getId());
         return "order/detail";
     }
 }

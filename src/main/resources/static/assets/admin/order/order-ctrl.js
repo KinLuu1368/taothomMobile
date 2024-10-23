@@ -9,8 +9,18 @@ app.controller("order-ctrl", function($scope, $http) {
             $scope.ordercount = $scope.items.length;
             console.log($scope.items);
         });
-        
     };
+
+	$scope.delete = function(item) {
+		$http.delete(`/rest/order/${item.id}`).then(resp => {
+			var index = $scope.items.findIndex(p => p.id == item.id);
+			$scope.items.splice(index, 1);
+			alert("delete success");
+		}).catch(error => {
+			alert("delete fail");
+			console.log("Error", error);
+		});
+	};
 
     $scope.pager = {
 		page: 0,
@@ -42,4 +52,5 @@ app.controller("order-ctrl", function($scope, $http) {
 		}
 	}
     $scope.initialize();
+
 });

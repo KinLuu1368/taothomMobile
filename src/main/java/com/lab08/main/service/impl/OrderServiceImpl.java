@@ -52,4 +52,14 @@ public class OrderServiceImpl implements OrderService {
         return odao.findAll();
     }
 
+    @Override
+    public void deleteOrderById(Long id) {
+        odao.deleteById(id);
+    }
+
+    @Override
+    public void deleteOrderDetailsByOrderId(Integer orderId) {
+        ddao.deleteByOrderId(orderId);
+    }
+
 }
