@@ -10,7 +10,11 @@
 
 <body>
     
-    <main class="container py-4">        
+    <main class="container py-4"> 
+        <div class="mb-4" style="font-size: medium; text-decoration: none;">
+            <span><a href="/" style="text-decoration: none; color: gray;">Trang chủ</a> ></span>
+            <span style="text-decoration: none; color: gray;" th:text="${nameSeries}"> </span>
+        </div>       
         <div class="row g-4">
             <div th:if="${#lists.isEmpty(items)}" class="col-12">
                 <p class="text-center">Sản phẩm đang cập nhật</p>

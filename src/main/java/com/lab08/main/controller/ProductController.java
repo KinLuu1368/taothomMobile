@@ -52,6 +52,7 @@ public class ProductController {
             List<Product> products = productService.findByCategoryId(cid.get());
             List<Product> lowestPriceProducts = getLowList(products);
             model.addAttribute("items", lowestPriceProducts);
+            model.addAttribute("nameSeries", products.get(0).getCategory().getName());
             return "product/list";
         } else if (name.isPresent()) {
             List<Product> products = productService.findByName(name.get());
