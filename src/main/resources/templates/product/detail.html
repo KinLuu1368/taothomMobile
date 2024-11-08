@@ -45,6 +45,10 @@
                             <li class="list-group-item" th:text="'Dung lượng: ' + *{productCapacity.capacity} + 'GB'">
                             </li>
 
+                            <!-- Stock Status -->
+                            <li class="list-group-item">
+                                <span th:text="'Tình trạng: ' + (*{available} ? 'Còn hàng' : 'Hết hàng')"></span>
+                            </li>
                         </ul>
                     </div>
                     <div class="card h-100 p-3 shadow border-0">

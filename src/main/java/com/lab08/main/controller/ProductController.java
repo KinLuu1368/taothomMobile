@@ -52,7 +52,11 @@ public class ProductController {
             List<Product> products = productService.findByCategoryId(cid.get());
             List<Product> lowestPriceProducts = getLowList(products);
             model.addAttribute("items", lowestPriceProducts);
-            model.addAttribute("nameSeries", products.get(0).getCategory().getName());
+            try {
+                model.addAttribute("nameSeries", products.get(0).getCategory().getName());
+            } catch (Exception e) {
+                model.addAttribute("nameSeries", "Sản phẩm đang hết hàng hoặc đang cập nhật");
+            }
             return "product/list";
         } else if (name.isPresent()) {
             List<Product> products = productService.findByName(name.get());
