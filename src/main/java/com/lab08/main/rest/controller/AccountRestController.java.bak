@@ -80,12 +80,6 @@ public Map<String, Object> register(@RequestBody Account account, @RequestParam 
     return response;
 }
 
-@GetMapping("/check-username")
-public Map<String, Object> checkUsername(@RequestParam String username) {
-    Map<String, Object> response = new HashMap<>();
-    boolean exists = accountService.isUsernameExists(username);
-    response.put("exists", exists);
-    return response;
-}
+
 
 }

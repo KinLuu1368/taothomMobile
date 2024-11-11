@@ -17,4 +17,6 @@ public interface OrderService {
     public void deleteOrderById(Long id);
 
     public void deleteOrderDetailsByOrderId(Integer orderId);
+
+    public Order update(Order order);
 }

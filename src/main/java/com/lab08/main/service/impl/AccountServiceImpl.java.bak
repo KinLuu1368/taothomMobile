@@ -39,8 +39,4 @@ public class AccountServiceImpl implements AccountService {
     public List<Account> findAll() {
         return adao.findAll();
     }
-
-    public boolean isUsernameExists(String username) {
-        return adao.findById(username).isPresent();
-    }
 }

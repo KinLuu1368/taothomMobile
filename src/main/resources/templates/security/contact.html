@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dịch vụ hỗ trợ TaothomStore</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Container for the entire contact section */
+        .contact-container {
+            background-color: #f8f9fa;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .contact-info i {
+            color: #007bff;
+            font-size: 1.8rem;
+        }
+
+        .contact-info .info-item {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Customizing the form */
+        .contact-form .form-control,
+        .contact-form .btn-primary {
+            border-radius: 0.5rem;
+        }
+
+        .contact-form .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .contact-form .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+
+        .alert {
+            margin-bottom: 2rem;
+        }
+
+        .contact-info iframe {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .contact-form {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form .form-label {
+            font-weight: bold;
+        }
+
+
+        .contact-form button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container py-4">
+
+        <div class="contact-container">
+            <h2 class="text-center mb-4">Dịch vụ hỗ trợ TaothomStore</h2>
+
+
+            <div th:if="${param.success}" class="alert alert-success" role="alert">
+                Xin cảm ơn, Email của bạn sẽ được phản hồi sau ít phút nữa!
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-4">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62701.51268714847!2d106.65844397649815!3d10.823206273676297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529466247deb7%3A0x837f6cf22372ab7e!2zUGjhu5UgVGjDtG5nIENhbyDEkOG6s25nIEZQVCBQb2x5dGVjaG5pYyBUUC5IQ00!5e0!3m2!1svi!2s!4v1730948214158!5m2!1svi!2s"
+                        width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span class="ms-2">Địa chỉ: 123 Đường ABC, Quận 1, TP. Hồ Chí Minh</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <span class="ms-2">Số điện thoại: <a href="tel:+84123456789">+84 123 456 789</a></span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span class="ms-2">Email: <a
+                                    href="mailto:contact@example.com">contact@example.com</a></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <form class="contact-form" action="/contact" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Tên của bạn</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Nội dung tin nhắn</label>
+                            <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Gửi tin nhắn</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
+</body>
+
+</html>

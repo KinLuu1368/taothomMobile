@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.lab08.main.DAO.OrderDetailDAO;
 import com.lab08.main.Entity.Order;
 import com.lab08.main.Entity.OrderDetail;
+import com.lab08.main.Entity.Product;
 import com.lab08.main.service.OrderService;
 
 
@@ -52,8 +54,10 @@ public class OrderRestController {
         Long idLong = Long.valueOf(id);
         orderService.deleteOrderById(idLong);
     }
-
     
-
-    
+    @PutMapping("/{id}")
+    public Order update(@PathVariable("id") Integer id,
+            @RequestBody Order order) {
+        return orderService.update(order);
+    }
 }

@@ -13,6 +13,7 @@
                     <th>Name</th>
                     <th>Date</th>
                     <th>Address</th>
+                    <th>Tình trạng</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -22,14 +23,15 @@
                     <td>{{item.account.fullname}}</td>
                     <td>{{item.createDate | date : 'dd-MM-yyyy'}}</td>
                     <td>{{item.address}}</td>
+                    <td>{{item.orderStatus.status}}</td>
                     <td>
                         <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
                             <a target="_blank" href="/order/detail1/{{item.id}}" class="btn btn-info">
                                 <i class="bi bi-info-circle"></i> Details
                             </a>
-                            <!-- <button ng-click="edit(item)" class="btn btn-warning">
+                            <button ng-click="edit(item)" class="btn btn-warning">
                                 <i class="bi bi-pencil"></i> Edit
-                            </button> -->
+                            </button>
                             <button ng-click="delete(item)" class="btn btn-danger">
                                 <i class="bi bi-trash"></i> Delete
                             </button>

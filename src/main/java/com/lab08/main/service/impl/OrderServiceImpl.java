@@ -62,4 +62,9 @@ public class OrderServiceImpl implements OrderService {
         ddao.deleteByOrderId(orderId);
     }
 
+    @Override 
+    public Order update(Order order) {
+        return odao.save(order);
+    }
+
 }

@@ -55,6 +55,45 @@
             },
         });
     </script>
+     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sortSelect = document.getElementById('sort');
+            
+            sortSelect.addEventListener('change', sortProducts);
+
+            function sortProducts() {
+                const sortOption = sortSelect.value;
+
+                fetch(`/rest/products/sort?sortOption=${sortOption}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const productListContainer = document.getElementById('product-list');
+                        productListContainer.innerHTML = '';
+
+                        data.forEach(p => {
+                            const productHTML = `
+                                <div class="col-md-3">
+                                    <div class="card poly-item text-center h-100 shadow-sm border-0">
+                                        <a href="/product/detail/${p.id}" class="text-decoration-none">
+                                            <div class="card-img-top position-relative overflow-hidden">
+                                                <img src="/assets/images/${p.image}" class="img-fluid rounded-top">
+                                            </div>
+                                        </a>
+                                        <div class="card-body p-3">
+                                            <h6 class="card-title text-dark fw-bold">${p.productModel.name} ${p.productCapacity.capacity}GB | VN/A</h6>
+                                            <p class="card-text text-danger fw-bold mb-0">${p.price} đ</p>
+                                            <button class="btn btn-success">
+                                                <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            productListContainer.innerHTML += productHTML;
+                        });
+                    });
+            }
+        });
+    </script>
 </body>
 
 <style>

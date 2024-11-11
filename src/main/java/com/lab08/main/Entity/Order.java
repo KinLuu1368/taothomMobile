@@ -42,4 +42,8 @@ public class Order implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "order")
     List<OrderDetail> orderDetails;
+
+    @ManyToOne
+    @JoinColumn(name = "Orderstatusid") // Liên kết với OrderStatus
+    OrderStatus orderStatus;
 }

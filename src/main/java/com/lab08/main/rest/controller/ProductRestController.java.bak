@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lab08.main.Entity.Product;
@@ -49,10 +48,4 @@ public class ProductRestController {
     public void delete(@PathVariable("id") Integer id) {
         productService.delete(id);
     }
-
-    @GetMapping("/sort")
-    public List<Product> sortProducts(@RequestParam("sortOption") String sortOption) {
-        return productService.sortProducts(sortOption);
-    }
-    
 }

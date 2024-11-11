@@ -2,18 +2,19 @@ package com.lab08.main.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SecurityController {
     @RequestMapping("/security/login/form")
     public String loginForm(Model model) {
-        model.addAttribute("message", "Vui long dang nhap!");
+        model.addAttribute("message", "Vui lòng đăng nhập!");
         return "security/login";
     }
     @RequestMapping("/security/register/form")
     public String registerForm(Model model) {
-        model.addAttribute("message", "Vui long dang ký!");
+        model.addAttribute("message", "Vui lòng đăng ký!");
         return "security/register";
     }
 
@@ -39,5 +40,15 @@ public class SecurityController {
     public String logoffSuccess(Model model) {
         model.addAttribute("message", "Bạn đã đăng xuất");
         return "security/login";
+    }
+
+    @RequestMapping("/security/contact")
+    public String contact(Model model) {
+        return "security/contact";
+    }
+
+    @GetMapping("security/contact")
+    public String showContactPage() {
+        return "security/contact"; 
     }
 }
