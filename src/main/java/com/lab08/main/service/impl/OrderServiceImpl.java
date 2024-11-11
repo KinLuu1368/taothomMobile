@@ -11,8 +11,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lab08.main.DAO.OrderDAO;
 import com.lab08.main.DAO.OrderDetailDAO;
+import com.lab08.main.DAO.OrderStatusDAO;
 import com.lab08.main.Entity.Order;
 import com.lab08.main.Entity.OrderDetail;
+import com.lab08.main.Entity.OrderStatus;
 import com.lab08.main.service.OrderService;
 
 @Service
@@ -21,6 +23,8 @@ public class OrderServiceImpl implements OrderService {
     OrderDAO odao;
     @Autowired
     OrderDetailDAO ddao;
+    @Autowired
+    OrderStatusDAO orderStatusDAO;
 
     @Override
     public Order create(JsonNode orderData) {
@@ -65,6 +69,26 @@ public class OrderServiceImpl implements OrderService {
     @Override 
     public Order update(Order order) {
         return odao.save(order);
+    }
+
+    @Override 
+    public Order save(Order order) {
+        return odao.save(order);
+    }
+
+    @Override
+    public void updateOrderStatus(Long orderId, int idLong) {
+        // Lấy đơn hàng từ repository
+        Order order = odao.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+
+        // Lấy trạng thái "Đã xử lý" từ OrderStatus repository
+        OrderStatus processedStatus = orderStatusDAO.getById(Long.valueOf(idLong));
+
+        // Cập nhật trạng thái đơn hàng
+        order.setOrderStatus(processedStatus);
+        
+        // Lưu thay đổi vào cơ sở dữ liệu
+        odao.save(order);
     }
 
 }
