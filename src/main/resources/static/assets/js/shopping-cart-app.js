@@ -103,13 +103,14 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
 		console.log(ward1)
 		const district = $scope.districts.find(d => d.code === parseInt($scope.selectedDistrict))?.name || '';
 		const province = $scope.provinces.find(p => p.code === parseInt($scope.selectedProvince))?.name || '';
-
 		$scope.order.address = `${houseNumber}, ${ward1}, ${district}, ${province}`;
+		console.log($scope.order.phonenumber)
 	};
 
 	$scope.order = {
 		createDate: new Date(),
 		address: "",
+		phonenumber: "",
 		orderStatus: { id: 1 },
 		account: { username: $("#username").text() }, get orderDetails() {
 		return $scope.cart.items.map((item) => {

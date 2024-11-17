@@ -13,6 +13,9 @@ import com.lab08.main.Entity.Product;
 import com.lab08.main.service.CategoryService;
 import com.lab08.main.service.ProductModelService;
 import com.lab08.main.service.ProductService;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -46,4 +49,10 @@ public class HomeController {
     public String admin() {
         return "redirect:/assets/admin/index.html";
     }
+
+    @RequestMapping("/security/unauthorized")
+    public String FailToAdmin(Model model) {
+        return "redirect:/";
+    }
+    
 }

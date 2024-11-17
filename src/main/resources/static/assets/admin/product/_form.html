@@ -59,6 +59,10 @@
                         <input id="createDate" ng-model="form.createDate" type="date" class="form-control">
                     </div>
                     <div class="col-sm-6">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input id="quantity" ng-model="form.quantity" class="form-control" type="number" step="0.01" placeholder="Enter quantity">
+                    </div>
+                    <div>
                         <label class="form-label">Available?</label>
                         <div class="form-check">
                             <input ng-model="form.available" ng-value="true" id="availableYes" name="available" type="radio" class="form-check-input">

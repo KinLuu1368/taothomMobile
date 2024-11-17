@@ -30,6 +30,9 @@ public class Order implements Serializable {
 
     Integer id;
 
+    @Column(nullable = false)
+    private String phonenumber;
+
     @Temporal(TemporalType.DATE)
     @Column(name = "Createdate")
     Date createDate = new Date();

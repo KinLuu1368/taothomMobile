@@ -10,9 +10,10 @@
             <thead class="bg-secondary text-white" style="font-variant: small-caps;">
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Address</th>
+                    <th>Tên</th>
+                    <th>Ngày đặt</th>
+                    <th>Địa chỉ</th>
+                    <th>Số điện thoại</th>
                     <th>Tình trạng</th>
                     <th>Actions</th>
                 </tr>
@@ -23,6 +24,7 @@
                     <td>{{item.account.fullname}}</td>
                     <td>{{item.createDate | date : 'dd-MM-yyyy'}}</td>
                     <td>{{item.address}}</td>
+                    <td>{{item.phonenumber}}</td>
                     <td>{{item.orderStatus.status}}</td>
                     <td>
                         <div class="btn-group btn-group-sm" role="group" aria-label="Actions">

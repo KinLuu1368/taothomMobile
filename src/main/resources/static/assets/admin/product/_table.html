@@ -13,7 +13,8 @@
                     <th>Color</th>
                     <th>Storage</th>
                     <th>Price</th>
-                    <th>Date</th>                  
+                    <th>Date</th>   
+                    <th>Quantity</th>               
                     <th>Available?</th>
                     <th>Actions</th>
                 </tr>
@@ -27,7 +28,8 @@
                     <td>{{item.productColor.color}}</td>
                     <td>{{item.productCapacity.capacity}}GB</td>
                     <td>{{item.price | number : 0}} đ</td>
-                    <td>{{item.createDate | date : 'dd-MM-yyyy'}}</td>                    
+                    <td>{{item.createDate | date : 'dd-MM-yyyy'}}</td>    
+                    <td>{{item.quantity}}</td>                
                     <td>{{item.available ? 'Yes' : 'No'}}</td>
                     <td>
                         <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
