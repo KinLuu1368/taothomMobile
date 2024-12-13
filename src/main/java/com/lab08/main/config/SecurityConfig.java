@@ -64,7 +64,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/security/login/form")
                         .loginProcessingUrl("/security/login")
-                        .defaultSuccessUrl("/security/login/success", false)
+                        .defaultSuccessUrl("/", false)
                         .failureUrl("/security/login/error"))
                 .rememberMe(remember -> remember
                         .tokenValiditySeconds(86400))

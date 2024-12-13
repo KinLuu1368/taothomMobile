@@ -1,6 +1,7 @@
 package com.lab08.main.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,22 @@ public class AccountServiceImpl implements AccountService {
 
     public boolean isUsernameExists(String username) {
         return adao.findById(username).isPresent();
+    }
+
+    public Optional<Account> findByEmail(String email) {
+        return adao.findByEmail(email);
+    }
+    public void update(Account account) {
+            adao.save(account);
+    }
+
+    @Override
+    public void changePassword(String email, String newPassword) {
+        Optional<Account> accountOpt = adao.findByEmail(email);
+        if (accountOpt.isPresent()) {
+            Account account = accountOpt.get();
+            account.setPassword(newPassword);  // Cập nhật mật khẩu mới
+            adao.save(account);   // Lưu lại tài khoản với mật khẩu đã thay đổi
+        }
     }
 }

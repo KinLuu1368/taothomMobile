@@ -51,4 +51,9 @@ public class SecurityController {
     public String showContactPage() {
         return "security/contact"; 
     }
+    
+    @RequestMapping("/security/forgotPassword")
+    public String forgotPassword(Model model) {
+        return "security/forgotPassword";
+    }
 }

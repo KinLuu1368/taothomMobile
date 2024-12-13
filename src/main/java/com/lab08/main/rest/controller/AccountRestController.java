@@ -36,7 +36,7 @@ public class AccountRestController {
             return accountService.findAll();
         }
     }
-       @PostMapping()
+    @PostMapping()
     public Account create(@RequestBody Account account) {
         return accountService.create(account);
     }   
@@ -88,4 +88,33 @@ public Map<String, Object> checkUsername(@RequestParam String username) {
     return response;
 }
 
+@PostMapping("/change-password")
+    public Map<String, Object> changePassword(@RequestBody Map<String, String> requestData, @RequestParam String code) {
+        String email = requestData.get("email");
+        String newPassword = requestData.get("newPassword");
+
+        Map<String, Object> response = new HashMap<>();
+        String savedCode = verificationCodes.get(email.toLowerCase());
+
+        if (savedCode != null && savedCode.equals(code)) {
+            // Cập nhật mật khẩu
+            Optional<Account> accountOpt = accountService.findByEmail(email);
+            if (accountOpt.isPresent()) {
+                Account account = accountOpt.get();
+                account.setPassword(newPassword);  // Bạn có thể thêm mã hóa mật khẩu tại đây
+                accountService.update(account);    // Cập nhật tài khoản
+                verificationCodes.remove(email.toLowerCase());
+
+                response.put("success", true);
+                response.put("message", "Mật khẩu đã được thay đổi thành công!");
+            } else {
+                response.put("success", false);
+                response.put("message", "Tài khoản không tồn tại!");
+            }
+        } else {
+            response.put("success", false);
+            response.put("message", "Mã xác thực không chính xác!");
+        }
+        return response;
+    }
 }

@@ -48,7 +48,8 @@ app.controller("statistic-ctrl", function($scope, $http) {
                 $scope.monthlyRevenue += 1;
             }
         });
-        $scope.monthlyRevenues[10] = 30900000;
+        $scope.monthlyRevenues[10] = 21900000;
+        $scope.monthlyRevenues[11] = 73200000;
     };
 
     $scope.initialize();
